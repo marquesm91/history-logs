@@ -21,7 +21,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
-    "tailwindcss": "^1.6.2"
+    "tailwindcss": "^1.6.2",
+    "typeface-roboto": "0.0.75"
   },
   "eslintConfig": {
     "extends": "react-app"
