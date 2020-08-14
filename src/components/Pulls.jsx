@@ -1,12 +1,13 @@
 import React from 'react';
 import { getRecentPulls } from '../utils/services';
+import Pull from './Pull';
 
 function Pulls() {
   const [pulls, setPulls] = React.useState([]);
 
   React.useEffect(() => {
     async function getPulls() {
-      const result = await getRecentPulls({ state: 'open' });
+      const result = await getRecentPulls({ state: 'all' });
 
       setPulls(result);
     }
@@ -15,12 +16,11 @@ function Pulls() {
   }, []);
 
   return (
-    <div
-      className="hello-world"
-      style={{ display: 'flex', flexDirection: 'column' }}
-    >
-      {pulls.map(p => (
-        <div key={p.id}>{p.title}</div>
+    <div className="container mx-auto">
+      {pulls.map(pull => (
+        <React.Fragment key={pull.id}>
+          <Pull data={pull} />
+        </React.Fragment>
       ))}
     </div>
   );
