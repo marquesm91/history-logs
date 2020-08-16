@@ -23,6 +23,4 @@ Private Access Tokens can be created following the [Github Docs](https://docs.gi
 
 ```sh
 REACT_APP_TOKEN=<YOUR_PRIVATE_ACCESS_TOKEN>
-REACT_APP_OWNER=<OWNER_REPO>
-REACT_APP_REPO=<REPO_NAME>
 ```
