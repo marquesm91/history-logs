@@ -1,3 +1,5 @@
+import EndpointParams from './EndpointParams';
+
 async function http(method, endpoint, options = {}) {
   const url = buildURL(endpoint, options.params);
 
@@ -20,13 +22,16 @@ async function http(method, endpoint, options = {}) {
   return response;
 }
 
-export function buildURL(endpoint, params = {}) {
+function buildURL(endpoint, params = {}) {
   const baseURL = 'https://api.github.com';
   const qs = new URLSearchParams(Object.entries(params)).toString();
+  const endpointParams = EndpointParams.getParams();
 
-  const _endpoint = endpoint
-    .replace('{owner}', process.env.REACT_APP_OWNER)
-    .replace('{repo}', process.env.REACT_APP_REPO);
+  let _endpoint = endpoint;
+
+  Object.keys(endpointParams).forEach(paramName => {
+    _endpoint = _endpoint.replace(`{${paramName}}`, endpointParams[paramName]);
+  });
 
   return [baseURL + _endpoint, qs].filter(v => v).join('?');
 }

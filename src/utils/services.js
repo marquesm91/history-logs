@@ -11,3 +11,13 @@ export async function getUser(username) {
 
   return user;
 }
+
+export async function getRepos() {
+  const repos = await http('GET', '/user/repos', {
+    params: {
+      sort: 'updated',
+    },
+  });
+
+  return repos;
+}
