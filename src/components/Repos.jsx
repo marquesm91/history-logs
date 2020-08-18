@@ -2,10 +2,25 @@ import React from 'react';
 
 function Repos({ repos, onChange }) {
   const node = React.useRef();
+  const [search, setSearch] = React.useState('');
   const [visible, setVisible] = React.useState(false);
   const [selected, setSelected] = React.useState(() => {
     return repos.length ? repos[0] : '';
   });
+
+  const filteredRepos = React.useMemo(() => {
+    if (search === '') {
+      return repos;
+    }
+
+    const _search = search.toLowerCase();
+
+    return repos.filter(r => {
+      const name = r.name.toLowerCase();
+
+      return name.indexOf(_search) >= 0;
+    });
+  }, [repos, search]);
 
   function select(repo) {
     setSelected(repo);
@@ -52,11 +67,18 @@ function Repos({ repos, onChange }) {
       </div>
       <div
         className={
-          'absolute top-0 left-0 mt-12 -ml-px bg-white border border-solid border-gray-300 rounded-sm w-48 h-64 overflow-y-auto' +
+          'absolute top-0 left-0 mt-12 -ml-px bg-white border border-solid border-gray-300 rounded-sm w-64 h-64 overflow-y-auto' +
           (visible ? ' block' : ' hidden')
         }
       >
-        {repos.map(repo => (
+        <input
+          value={search}
+          placeholder="Buscar..."
+          className="w-56 my-2 py-2 mx-4 px-4"
+          onChange={e => setSearch(e.target.value)}
+          onClick={e => e.stopPropagation()}
+        />
+        {filteredRepos.map(repo => (
           <div className="h-12" key={repo.id} onClick={() => select(repo)}>
             <div className="flex items-center px-2 w-full h-full cursor-pointer">
               <img
