@@ -4,6 +4,7 @@ import getPullMeta from '../utils/getPullMeta';
 import SideMenu from '../templates/SideMenu';
 import Pulls from '../components/Pulls';
 import Menu from '../components/Menu';
+import Navbar from '../components/Navbar';
 import EndpointParams from '../utils/EndpointParams';
 
 function Home() {
@@ -56,11 +57,13 @@ function Home() {
     getRepos();
   }, [changeRepo]);
 
+  console.log(repos);
+  console.log(changeRepo);
+
   return (
     <SideMenu
-      menu={
-        <Menu sections={sections} repos={repos} onChangeRepo={changeRepo} />
-      }
+      navbar={<Navbar repos={repos} onChangeRepo={changeRepo} />}
+      menu={<Menu sections={sections} />}
       content={<Pulls pulls={pulls} />}
     />
   );

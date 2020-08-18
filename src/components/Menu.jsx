@@ -1,7 +1,6 @@
 import React from 'react';
-import Repos from './Repos';
 
-function Menu({ sections, repos, onChangeRepo }) {
+function Menu({ sections }) {
   const [selected, setSelected] = React.useState(0);
 
   React.useEffect(() => {
@@ -50,10 +49,7 @@ function Menu({ sections, repos, onChangeRepo }) {
   }
 
   return (
-    <div className="flex flex-col items-center w-6 my-12 ml-12">
-      <div className="ml-12 mb-6 border-2 border-solid border-gray-300 rounded-sm text-gray-700">
-        <Repos repos={repos} onChange={onChangeRepo} />
-      </div>
+    <div className="flex flex-col items-center w-6 mb-12">
       {sections.map((section, index) => (
         <React.Fragment key={section.ref}>
           {index === 0 ? null : (
