@@ -57,8 +57,10 @@ function Home() {
     getRepos();
   }, [changeRepo]);
 
-  console.log(repos);
-  console.log(changeRepo);
+  // TODO: Add loading state
+  if (repos.length === 0) {
+    return null;
+  }
 
   return (
     <SideMenu
